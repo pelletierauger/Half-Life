@@ -1,0 +1,67 @@
+body {
+    padding: 0;
+    margin: 0;
+    background-color: #1C1C1C;
+}
+canvas {
+    display: block;
+    margin: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    max-width: 1280px;
+    /*bottom: 0;*/
+    right: 0;
+}
+
+.canvasZero {
+    z-index: 0;
+}
+
+.canvasOne {
+    z-index: 1;
+}
+
+#timeline, #timeline-index {
+    margin: unset;
+    display: block;
+    /*float: left;*/
+    position: absolute;
+    max-width: 686px;
+    max-height: 50px;
+    /*top: 200;*/
+    top: unset;
+    bottom: 30px;
+    left: unset;
+    right: 12px;
+    /*border: 1px solid black;*/
+    background: #CDCDCD;
+    z-index: 2;
+}
+
+#timeline-index {
+    /*background: #B7B7B7;*/
+    background: none;
+    z-index: 3;
+}
+
+#timelines {
+    float: left;
+    display: block;
+    width: 686px;
+    max-width: 686px;
+    max-height: 50px;
+}
+
+#screen-curtain {
+    display: none;
+    position: absolute;
+    width: 100%;
+    height: 80px;
+    min-width: 100%;
+    background: black;
+    bottom: 0px;
+    left: 0px;
+    z-index: 100;
+}

@@ -1,0 +1,13 @@
+ls | wc -l
+
+ffmpeg -f image2 -framerate 24 \
+-i /Volumes/Volumina/frames/half-life/render-01/hl-frame-%05d.png \
+-i /Volumes/Volumina/frames/half-life/hl.wav \
+-c:v libx264 -x264-params "keyint=15:no-deblock=1" -pix_fmt yuv420p \
+-sws_flags spline+accurate_rnd+full_chroma_int \
+-vf "colorspace=bt709:iall=bt601-6-625:fast=1" \
+-color_range 1 -colorspace 1 -color_primaries 1 -color_trc 1 \
+-crf 23 -preset medium \
+-c:a libmp3lame -b:a 320k \
+-threads 1 \
+/Volumes/Volumina/video-renders/hl/test.mp4

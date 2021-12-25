@@ -1347,8 +1347,10 @@ float map(float value, float min1, float max1, float min2, float max2) {
         // y *= sin(d * 1e2) * 0.0;
         x *= 1.5e-3;
         y *= 1.5e-3;
-        x += cos(t * 1e2) * i * 1e-4;
-        y += sin(t * 1e2) * i * 1e-4;
+        x += cos(t * 1e-2 * d) * i * 1e-4;
+        y += sin(t * 1e-2 * d) * i * 1e-4;
+        x += cos(t * 1e2) * i * 0.5e-4;
+        y += sin(t * 1e2) * i * 0.5e-4;
 //         float x = cos(i) * i * 1e-5 * 2.;
 //         float y = sin(i) * i * 1e-5 * 2.;
         gl_Position = vec4(x * 0.6 * 2e-1, y * 2e-1, 0.0, 1.0);
@@ -1356,7 +1358,7 @@ float map(float value, float min1, float max1, float min2, float max2) {
 //         center = 512.0 + center * 512.0;
 //         myposition = vec2(gl_Position.x, gl_Position.y);
         alph = 0.25 * 0.5;
-        gl_PointSize = 14.0 * resolutionScalar * 500. / d * sin(i * 1e-2 * t);
+        gl_PointSize = 24.0 * resolutionScalar * 200. / d + 5.;
         // gl_PointSize = 25.0 + cos((coordinates.x + coordinates.y) * 4000000.) * 5.;
         // gl_PointSize = coordinates.z / (alph * (sin(myposition.x * myposition.y * 1.) * 3. + 0.5));
     }

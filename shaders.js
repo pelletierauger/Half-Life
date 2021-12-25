@@ -1326,24 +1326,28 @@ float map(float value, float min1, float max1, float min2, float max2) {
 // 
     void main(void) {
         float t = time * 2e-4;
-        float osc = map(sin(t * 16e-1), -1., 1., 0.05, 4.005);
+        float osc = map(sin(t * 16e-2), -1., 1., 0.05, 4.005);
         float i = vertexID * 1e-1;
         float x = cos(i * 1.5e-6 * i) * i * 16e-3;
         float y = sin(i * 1.5e-6 * i) * i * 16e-3;
-        x += tan(tan(i * i * cos(i * 1e2 * sin(i * 2e3)) * 1e5) + osc * 1e1 / i * 1e4) * 5000.5;
-        y += tan(tan(i * i * sin(i * 1e2 * sin(i * 2e3)) * 1e5) + osc * 1e1 / i * 1e4) * 5000.5;
+        x += tan(tan(pow(i, 5.) * cos(i * 1e-1 * sin(i * 2e5)) * 1e5) * 1. + osc * 1e2 / i * 1e4) * 3000.5;
+        y += tan(tan(pow(i, 5.) * sin(i * 1e-1 * sin(i * 2e5)) * 1e5) * 1. + osc * 1e2 / i * 1e4) * 3000.5;
 //         x *= 0.25 * 44.5;
-        // y += cos(x * i) * x * 2e1;
-        // x += sin(y * i) * y * 2.;
-        x += cos(t * 0.75e2) * i * 0.0625;
-        y += sin(t * 0.75e2) * i * 0.0625;
+        // y += cos(y * i) * y * 10e-1;
+        // x += sin(x * i) * x * 10e-1;
+        x += cos(t * 0.75e2 + i * 1e-3) * i * 0.125;
+        y += sin(t * 0.75e2 + i * 1e-3) * i * 0.125;
         // x += 1000. * cos(t * 1e1) * 1.;
         // y += 1000. * sin(t * 1e1) * 1.;
+        // var d = sq{(x_2-x_1)^2+(y_2-y_1)^2};
+        float d = distance(vec2(0., 0.), vec2(x, y));
+        x += cos(d * 0.5e-2 * sin(t * 1e2)) * 1e2;
+        y += sin(d * 0.5e-2 * sin(t * 1e2)) * 1e2;
         x *= 1.5e-3;
         y *= 1.5e-3;
 //         float x = cos(i) * i * 1e-5 * 2.;
 //         float y = sin(i) * i * 1e-5 * 2.;
-        gl_Position = vec4(x * 0.6 * 1e-1, y * 1e-1, 0.0, 1.0);
+        gl_Position = vec4(x * 0.6 * 0.75e-1, y * 0.75e-1, 0.0, 1.0);
 //         center = vec2(gl_Position.x, gl_Position.y);
 //         center = 512.0 + center * 512.0;
 //         myposition = vec2(gl_Position.x, gl_Position.y);

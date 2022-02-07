@@ -1326,20 +1326,16 @@ float map(float value, float min1, float max1, float min2, float max2) {
 // 
     void main(void) {
         float t = time * 1e-4;
+        float sc = resolutionScalar;
         float osc = map(sin(t * 16e-2), -1., 1., 0.05, 4.005);
         float i = vertexID * 1e-1;
-        float x = cos(i * 1.5e6) * i * 1e-4;
-        float y = sin(i * 1.5e6) * i * 1e-4;
-        x += tan(cos(pow(i, 0.2) * cos(i * 1e-1 * sin(i * 2e5)) * 1e5) * 1. + osc * 1e2 / i * 1e4) * 3000.5;
-        y += tan(sin(pow(i, 0.2) * sin(i * 1e-1 * sin(i * 2e5)) * 1e5) * 1. + osc * 1e2 / i * 1e4) * 3000.5;
-//         x *= 0.25 * 44.5;
-        // y += cos(y * i) * y * 10e-1;
-        // x += sin(x * i) * x * 10e-1;
-        // x += cos(t * 0.25e2 + i * 1e-2) * i * 0.125;
-        // y += sin(t * 0.25e2 + i * 1e-2) * i * 0.125;
-        // x += 1000. * cos(t * 1e1) * 1.;
-        // y += 1000. * sin(t * 1e1) * 1.;
-        // var d = sq{(x_2-x_1)^2+(y_2-y_1)^2};
+        float x = cos(i * 100.5e6) * i * 1e-4;
+        float y = sin(i * 100.5e6) * i * 1e-4;
+        x += cos(floor(i / 100.)) * 1000.;
+        y += sin(floor(i / 100.)) * 1000.;
+        
+        x += cos(tan(cos(pow(i, 0.2) * cos(i * 1e-1 * sin(i * 2e5)) * 1e2) * 0.25 + osc * 1e2 / i * 1e4)) * 500.5;
+        y += sin(tan(sin(pow(i, 0.2) * sin(i * 1e-1 * sin(i * 2e5)) * 1e2) * 0.25 + osc * 1e2 / i * 1e4)) * 500.5;
         float d = distance(vec2(0., 0.), vec2(x, y));
         // x += cos(d * 0.5e-1 * sin(t * 1e1)) * 1e2;
         // y += sin(d * 0.5e-1 * sin(t * 1e1)) * 1e2;
@@ -1347,19 +1343,12 @@ float map(float value, float min1, float max1, float min2, float max2) {
         // y *= sin(d * 1e2) * 0.0;
         x *= 1.5e-3;
         y *= 1.5e-3;
-        x += cos(t * 1e2) * i * 3e-4;
-        y += sin(t * 1e2) * i * 3e-4;
-//         float x = cos(i) * i * 1e-5 * 2.;
-//         float y = sin(i) * i * 1e-5 * 2.;
-        gl_Position = vec4(x * 0.6 * 1e-1, y * 1e-1, 0.0, 1.0);
-//         center = vec2(gl_Position.x, gl_Position.y);
-//         center = 512.0 + center * 512.0;
-//         myposition = vec2(gl_Position.x, gl_Position.y);
+        x += cos(t * 1e2) * i * 3e-5;
+        y += sin(t * 1e2) * i * 3e-5;
+        gl_Position = vec4(x * 0.6 * 0.5, y * 0.5, 0.0, 1.0);
         alph = 0.25 * 0.5;
-        gl_PointSize = 14.0 * resolutionScalar * 500. / d * sin(i * 1e-2 * t) + 4.;
-        // gl_PointSize = 25.0 + cos((coordinates.x + coordinates.y) * 4000000.) * 5.;
-        // gl_PointSize = coordinates.z / (alph * (sin(myposition.x * myposition.y * 1.) * 3. + 0.5));
-    }
+        gl_PointSize = ((10.0 * sc * 500. / d * sin(i * 1e-3 * sin(t * 1e-2) * t) / sc) + 10.) * sc;
+   }
     // endGLSL
 `;
 anneauxFlottants3.fragText = `

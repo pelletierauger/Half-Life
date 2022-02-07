@@ -5,7 +5,7 @@ xSheet = {
     // Introduction
     // ------------------------------------------------------------------------- //   
     anneaux3: {
-        d: 523,
+        d: 2523,
         f: sum => {
             sceneCount = drawCount - getSum(xSheet, xSheet.anneaux);
             fogCount = 602 + drawCount * 0.00025;

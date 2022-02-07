@@ -1343,8 +1343,8 @@ float map(float value, float min1, float max1, float min2, float max2) {
         // y *= sin(d * 1e2) * 0.0;
         x *= 1.5e-3;
         y *= 1.5e-3;
-        x += cos(t * 1e2) * i * 3e-5;
-        y += sin(t * 1e2) * i * 3e-5;
+        x += cos(t * 0.5e3 + d * 1e-2) * i * 3e-5;
+        y += sin(t * 0.5e3 + d * 1e-2) * i * 3e-5;
         gl_Position = vec4(x * 0.6 * 0.5, y * 0.5, 0.0, 1.0);
         alph = 0.25 * 0.5;
         gl_PointSize = ((10.0 * sc * 500. / d * sin(i * 1e-3 * sin(t * 1e-2) * t) / sc) + 10.) * sc;

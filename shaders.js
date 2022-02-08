@@ -1325,17 +1325,19 @@ float map(float value, float min1, float max1, float min2, float max2) {
 }
 // 
     void main(void) {
-        float t = time * 1e-4;
+        float t = time * 1e-5;
         float sc = resolutionScalar;
         float osc = map(sin(t * 16e-2), -1., 1., 0.05, 4.005);
         float i = vertexID * 1e-1;
-        float x = cos(i * cos(i)) * i * sin(i * 1e-4) * 1e-2;
-        float y = sin(i * cos(i)) * i * sin(i * 1e-4) * 1e-2;
-        float d = distance(vec2(0., 0.), vec2(x, y));
-        x /= d * i * 0.1 * cos(i * 0.0001);
-        y /= d * i * 0.1 * sin(i * 0.0001);
-        x += cos(t * 0.5e3 + d * 2e-2) * i * 4e-7;
-        y += sin(t * 0.5e3 + d * 2e-2) * i * 4e-7;
+        float x = cos(i * cos(i) * 1e2) * i * 1e-2;
+        float y = sin(i * cos(i) * 1e2) * i * 1e-2;
+        float d = distance(vec2(0., 0.), vec2(cos(x) * 1e2, sin(y) * 1e2));
+        x /= d * i * 0.05 * cos(i * 0.0001);
+        y /= d * i * 0.05 * sin(i * 0.0001);
+        x += cos(t * 0.5e4 + d * 2e-2) * i * 4e-7;
+        y += sin(t * 0.5e4 + d * 2e-2) * i * 4e-7;
+        // x += cos(t * 0.5e3) * i * 2e-7;
+        // y += sin(t * 0.5e3) * i * 2e-7;
         gl_Position = vec4(x * 0.56 * 100., y * 100., 0.0, 1.0);
         alph = 0.25 * 0.5;
         gl_PointSize = 4. * 2. * sc;

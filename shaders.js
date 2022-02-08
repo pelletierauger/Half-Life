@@ -1329,25 +1329,16 @@ float map(float value, float min1, float max1, float min2, float max2) {
         float sc = resolutionScalar;
         float osc = map(sin(t * 16e-2), -1., 1., 0.05, 4.005);
         float i = vertexID * 1e-1;
-        float x = cos(i * 100.5e6) * i * 1e-4;
-        float y = sin(i * 100.5e6) * i * 1e-4;
-        x += cos(floor(i / 100.)) * 1000.;
-        y += sin(floor(i / 100.)) * 1000.;
-        
-        x += cos(tan(cos(pow(i, 0.2) * cos(i * 1e-1 * sin(i * 2e5)) * 1e2) * 0.25 + osc * 1e2 / i * 1e4)) * 500.5;
-        y += sin(tan(sin(pow(i, 0.2) * sin(i * 1e-1 * sin(i * 2e5)) * 1e2) * 0.25 + osc * 1e2 / i * 1e4)) * 500.5;
+        float x = cos(i * 1e1 * cos(i)) * i * 1e-2;
+        float y = sin(i * 1e1 * cos(i)) * i * 1e-2;
         float d = distance(vec2(0., 0.), vec2(x, y));
-        // x += cos(d * 0.5e-1 * sin(t * 1e1)) * 1e2;
-        // y += sin(d * 0.5e-1 * sin(t * 1e1)) * 1e2;
-        // x *= cos(d * 1e2) * 0.0;
-        // y *= sin(d * 1e2) * 0.0;
-        x *= 1.5e-3;
-        y *= 1.5e-3;
-        x += cos(t * 0.5e3 + d * 1e-2) * i * 3e-5;
-        y += sin(t * 0.5e3 + d * 1e-2) * i * 3e-5;
-        gl_Position = vec4(x * 0.6 * 0.5, y * 0.5, 0.0, 1.0);
+        x /= d * i * 0.1 * cos(i * 0.0001);
+        y /= d * i * 0.1 * sin(i * 0.0001);
+        x += cos(t * 1e2 + d * 1e-2) * i * 8e-8;
+        y += sin(t * 1e2 + d * 1e-2) * i * 8e-8;
+        gl_Position = vec4(x * 0.56 * 300., y * 300., 0.0, 1.0);
         alph = 0.25 * 0.5;
-        gl_PointSize = ((10.0 * sc * 500. / d * sin(i * 1e-3 * sin(t * 1e-2) * t) / sc) + 10.) * sc;
+        gl_PointSize = 4. * 2. * sc;
    }
     // endGLSL
 `;
@@ -1381,7 +1372,7 @@ anneauxFlottants3.fragText = `
         alpha = smoothstep(0.05 / (0.9 + alph), 0.000125, dist_squared) * 0.49;
         float rando = rand(pos);
         // gl_FragColor = vec4(1.0, (1.0 - dist_squared * 40.) * 0.6, 0.0, alpha + ((0.12 - dist_squared) * 4.) - (rando * 0.2));
-        gl_FragColor = vec4(1.0, 0.4 - dist_squared, 0.0 + alpha * 120., ((3. - dist_squared * 24.0 * (0.25 + alph) - (rando * 1.1)) * 0.045 + alpha)) * 0.125;
+        gl_FragColor = vec4(1.0, 0.4 - dist_squared, 0.0 + alpha * 120., ((3. - dist_squared * 24.0 * (0.25 + alph) - (rando * 1.1)) * 0.045 + alpha)) * 0.25;
 //         gl_FragColor = gl_FragColor.gbga;
         gl_FragColor.rgb = vec3(1.0) - gl_FragColor.rgb;
              gl_FragColor = gl_FragColor.grba;

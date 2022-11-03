@@ -2,7 +2,7 @@ let looping = false;
 var envirLooping = false;
 let keysActive = true;
 let socket, cnvs, ctx, canvasDOM;
-let fileName = "/Volumes/Volumina/frames/half-life/render-01/hl-frame";
+let fileName = "/Users/guillaumepelletier/Desktop/hl/hl-frame";
 let maxFrames = 15000;
 let gl;
 let time;
@@ -26,7 +26,7 @@ let namedPrograms = {};
 let texcoordShader;
 let dotsVBuf, bgVBuf;
 
-let resolutionScalar = 1;
+let resolutionScalar = 0.5;
 let brightnessBGScalar = 1;
 let resolutionBG, brightnessBG;
 let resetAllDisplayMethods = false;
@@ -341,8 +341,8 @@ draw = function() {
     gl.vertexAttribPointer(texcoordLocation, size, type, normalize, stride, offset);
     
     gl.drawArrays(gl.TRIANGLES, 0, numItems);
-    
-    
+    // da = canvasDOM.toDataURL();
+    // console.log(da.length);
    if (exporting) {
         frameExport();
     }
@@ -477,7 +477,7 @@ drawScene = function(selectedProgram) {
     var time = gl.getUniformLocation(selectedProgram, "time");
     // Point an attribute to the currently bound VBO
     // gl.vertexAttribPointer(coord, 1, gl.FLOAT, false, 0, 0);
-    gl.uniform1f(time, sceneCount);
+      gl.uniform1f(time, sceneCount);
     var scalar = gl.getUniformLocation(selectedProgram, "resolutionScalar");
     // Point an attribute to the currently bound VBO
     // gl.vertexAttribPointer(coord, 1, gl.FLOAT, false, 0, 0);
